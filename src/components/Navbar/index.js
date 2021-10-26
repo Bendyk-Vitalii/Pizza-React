@@ -1,11 +1,12 @@
 import React from "react";
 import {Nav, NavLink, NavIcon, Bars } from './Navbar'
-
+import ModalElement from '../Modal'
 
 const Navbar = ({toogle}) => {
     return (
         <React.Fragment>
-            <Nav>
+            <ModalElement />
+            <Nav> 
             <NavLink to='/'>Pizza</NavLink>
             <NavIcon onClick={toogle}>
                 <p>Menu</p>

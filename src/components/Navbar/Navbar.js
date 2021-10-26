@@ -15,9 +15,12 @@ color: #fff;
 font-size: 2rem;
 display: flex;
 align-items: center;
-text-decoration: none;
+text-decoration-color:  #e9ba23;
 cursor: pointer;
-
+:hover {
+      color: tomato;
+      transition: .2s ease-in;
+}
 @media screen and (max-width: 400px) {
     position: absolute;
     top: 10px;
@@ -31,8 +34,7 @@ position: absolute;
 top: 0;
 right: 0;
 cursor: pointer;
-color: #fff;
-
+color: #fff;        
 p {
     transform: translate(-175%, 100%);
     font-weight: bold;
@@ -42,5 +44,9 @@ p {
 export const Bars = styled(FaPizzaSlice)`
     font-size: 2rem;
     transform: translate(-50%, -15%);
+    :hover {
+        color: tomato;
+      transition: .2s ease-in;
+    }
 `;
 
