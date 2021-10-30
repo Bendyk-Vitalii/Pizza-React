@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const ProductsContainer = styled.div`
   /* width: 100vw; */
-  min-height: 100vh;
-  padding: 5rem calc((100vw - 1300px) / 2);
-  background: #150f0f;
+  min-height: 90vh;
+  padding: 3rem calc((100vw - 1300px) / 2);
+  background: smoke;
   color: #fff;
 `;
 
@@ -31,7 +31,8 @@ export const ProductImg = styled.img`
 export const ProductsHeading = styled.h1`
   font-size: clamp(2rem, 2.5vw, 3rem);
   text-align: center;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
+  color: black;
 `;
 
 export const ProductTitle = styled.h2`
@@ -46,6 +47,7 @@ export const ProductInfo = styled.div`
   align-items: center;
   padding: 2rem;
   text-align: center;
+  color: black;
 `;
 
 export const ProductDesc = styled.p`
@@ -64,6 +66,7 @@ export const ProductButton = styled.button`
   background: #e31837;
   color: #fff;
   transition: 0.2 ease-out;
+  border-radius: 5px;
   &:hover {
     background: #ffc500;
     transition: 0.2s ease-out;

@@ -7,6 +7,8 @@ import {
     SidebarLink, 
     SidebarRoute, 
     SideBtnWrap} from './Sidebar';
+    //import { HashLink } from 'react-router-hash-link';
+
 
     const Sidebar = ( {isOpen, toogle} ) => {
     return (
@@ -17,7 +19,7 @@ import {
             <SidebarMenu>
                 <SidebarLink to="/">Pizzas</SidebarLink>
                 <SidebarLink to="/">Desserts</SidebarLink>
-                <SidebarLink to="/">Full Menu</SidebarLink>
+                <SidebarLink to="/menu">Full Menu</SidebarLink>
             </SidebarMenu>
             <SideBtnWrap>
                 <SidebarRoute to="/">Order Now</SidebarRoute>

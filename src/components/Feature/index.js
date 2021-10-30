@@ -1,6 +1,5 @@
 import React from 'react';
 import { FeatureContainer, FeatureButton } from './Feature';
-
 const Feature = () => {
   return (
     <FeatureContainer>

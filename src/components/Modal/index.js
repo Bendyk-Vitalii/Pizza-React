@@ -22,21 +22,16 @@ const ModalElement = () => {
     console.log("open")
   }
 
-  function afterOpenModal() {
-
-  }
-
   function closeModal() {
     setIsOpen(false);
   }
-  
+ 
 
   return (
     <>
      <OpenButton onClick={openModal}>Log in</OpenButton>
       <ReactModal
         isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
       >
         <CloseModalButton onClick={closeModal}/>

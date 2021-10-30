@@ -13,7 +13,8 @@ export const productData = [
     desc:
       'Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto',
     price: '$19.99',
-    button: 'Add to Cart'
+    button: 'Add to Cart',
+    id: 1
   },
   {
     img: product2,
@@ -22,7 +23,8 @@ export const productData = [
     desc:
       ' Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto',
     price: '$16.99',
-    button: 'Add to Cart'
+    button: 'Add to Cart',
+    id: 2
   },
   {
     img: product3,
@@ -31,7 +33,8 @@ export const productData = [
     desc:
       ' Marinara sauce, basil, italian sausage, roma tomatoes, olives, and pesto',
     price: '$14.99',
-    button: 'Add to Cart'
+    button: 'Add to Cart',
+    id: 3
   }
 ];
 
@@ -43,7 +46,8 @@ export const productDataTwo = [
     desc:
       'Belgian chocolate glazed donuts covered in icing with sprinkles on top',
     price: '$9.99',
-    button: 'Add to Cart'
+    button: 'Add to Cart',
+    id: 4
   },
   {
     img: sweet3,
@@ -52,7 +56,8 @@ export const productDataTwo = [
     desc:
       'Vanilla ice cream covered with caramel and chocolate glaze topped with a coco stick',
     price: '$12.99',
-    button: 'Add to Cart'
+    button: 'Add to Cart',
+    id: 5
   },
   {
     img: sweet1,
@@ -61,6 +66,7 @@ export const productDataTwo = [
     desc:
       'Double fudge brownie squares topped with white chocolate pieces and macadamia nuts',
     price: '$9.99',
-    button: 'Add to Cart'
+    button: 'Add to Cart',
+    id: 6
   }
 ];

@@ -87,7 +87,8 @@ export const OpenButton = styled.button`
     transition: .2s ease-out;
     border-radius: 5px;
     :hover {
-      background-color: red;
+      color: tomato;
+      transition: .2s ease-in;
       cursor: pointer;
     }
     
