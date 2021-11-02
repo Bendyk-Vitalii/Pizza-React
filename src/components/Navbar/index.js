@@ -1,19 +1,16 @@
 import React from "react";
-import { Nav, NavIcon, Bars, Cart } from "./Navbar";
-import ModalElement from "../Modal";
+import { Nav, NavIcon } from "./Navbar";
+import LogInModal from "./LogInModal";
+import CartModal from "./CartModal"
 
-const Navbar = ({ toogle }) => {
+
+const Navbar = ({ toogle, cart }) => {
   return (
-    <React.Fragment>
-      <ModalElement />
       <Nav>
-        <Cart/>
-        <NavIcon onClick={toogle}>
-          <p>Menu</p>
-          <Bars />
-        </NavIcon>
+        <LogInModal />
+        <CartModal cart={cart} />
+        <NavIcon onClick={toogle} /> 
       </Nav>
-    </React.Fragment>
   );
 };
 

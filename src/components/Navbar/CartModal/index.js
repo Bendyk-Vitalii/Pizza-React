@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReactModal from "react-modal";
 import {
   CartContainer,
-  Container,
+
   ItemWrapper,
   CartDetails,
   CartImg,
@@ -13,8 +13,8 @@ import {
   ButtonMinus,
   ButtonRemove,
   CartLink,
+  CloseModalButton 
 } from "./Cart";
-import CloseModalButton from "../LogInModal";
 
 ReactModal.setAppElement("#root");
 
@@ -37,15 +37,15 @@ const Cart = ({ cart, totalItems }) => {
     <>
       <CartLink onClick={openModal}></CartLink>
       <ReactModal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <CloseModalButton onClick={closeModal} />
-        <h1>Your shopping cart</h1>
+      <CloseModalButton onClick={closeModal}/>
         <CartContainer>
+        <h1>Your shopping cart</h1>
           {cart.line_items.map((product) => (
             <ItemWrapper key={product.id}>
+              <CartImg src={product.image.url} alt={product.name} />
               <h3>{product.name}</h3>
-              <CartImg image={product.image.url} alt={product.name} />
-              <h4>{product.line_total.formated_with_symbol}</h4>
               <ButtonsQuanity>
+              <h4>{product.line_total.formated_with_symbol}</h4>
                 <ButtonPlus>+</ButtonPlus>
                 <ButtonMinus>-</ButtonMinus>
               </ButtonsQuanity>
@@ -63,9 +63,9 @@ const Cart = ({ cart, totalItems }) => {
   );
   if (!cart.line_items) return "Loading...";
   return (
-    <Container>
+    <CartContainer>
       {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
-    </Container>
+    </CartContainer>
   );
 };
 

@@ -11,7 +11,7 @@ import {
 } from './Hero';
 
 
-const Hero = () => {
+const Hero = ( {cart} ) => {
 const [isOpen, setIsOpen] = useState(false)
 
 const toogle = () => {
@@ -20,7 +20,7 @@ const toogle = () => {
 
     return (
         <HeroContainer>
-            <Navbar toogle={toogle}/>
+            <Navbar toogle={toogle} cart={cart} />
             <Sidebar isOpen={isOpen} toogle={toogle} />
             <HeroContent>
                 <HeroItems>

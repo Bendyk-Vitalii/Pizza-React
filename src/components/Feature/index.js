@@ -1,11 +1,22 @@
-import React from 'react';
-import { FeatureContainer, FeatureButton } from './Feature';
-const Feature = () => {
+import React from "react";
+import { FeatureContainer, FeatureButton } from "./Feature";
+
+const Feature = ({ data, buttonAddHandler }) => {
+
   return (
     <FeatureContainer>
       <h1>Pizza of the Day</h1>
-      <p>Truffle alfredo sauce topped with 24 carat gold dust.</p>
-      <FeatureButton>Order Now</FeatureButton>
+      {data.map((product) => {
+
+        return (
+          <>
+            <p dangerouslySetInnerHTML={{ __html: product.description }}></p>
+            <FeatureButton onClick={() => buttonAddHandler(product.id)}>
+              Order Now
+            </FeatureButton>
+          </>
+        );
+      })}
     </FeatureContainer>
   );
 };
