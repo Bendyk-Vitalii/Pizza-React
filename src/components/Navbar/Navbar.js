@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { NavLink as Link } from 'react-router-dom';
 import { FaPizzaSlice } from 'react-icons/fa';
-import { FaShoppingCart } from 'react-icons/fa';
+
 
 export const Nav = styled.nav`
 background-color: rgba(0, 0, 0, .4);
@@ -9,6 +9,7 @@ height: 80px;
 display: flex;
 justify-content: center;
 font-weight: 700;
+position: relative;
 `;
 
 export const NavLink = styled(Link)`
@@ -29,24 +30,13 @@ cursor: pointer;
 }
 `
 
-export const NavIcon = styled.div`
-display: block;
-position: absolute;
-top: 0;
-right: 0;
-cursor: pointer;
-color: #fff;        
-p {
-    transform: translate(-175%, 100%);
-    font-weight: bold;
-    :hover {
-        color: tomato;
-        transition: .2s ease-in;
-    }
-}
-`;
-
-export const Bars = styled(FaPizzaSlice)`
+export const NavIcon = styled(FaPizzaSlice)`
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 0;
+    cursor: pointer;
+    color: #fff;
     font-size: 2rem;
     transform: translate(-50%, -15%);
     :hover {
@@ -55,14 +45,5 @@ export const Bars = styled(FaPizzaSlice)`
     }
 `;
 
-export const Cart = styled(FaShoppingCart)`
-    font-size: 2rem;
-    color: #fff;
-    position: relative;
-    margin: auto auto 2rem  7rem;
-    :hover {
-        color: tomato;
-      transition: .2s ease-in;
-    }
-`;
+
 
