@@ -2,28 +2,28 @@ import React, { useState } from "react";
 import ReactModal from "react-modal";
 import {
   CartContainer,
-
   ItemWrapper,
   CartDetails,
-  CartImg,
+  Container,
   ButtonEmpty,
   ButtonBuy,
-  ButtonsQuanity,
+  ItemLeft,
+  ItemRight,
   ButtonPlus,
   ButtonMinus,
   ButtonRemove,
   CartLink,
-  CloseModalButton 
+  CloseModalButton,
+  ButtonsGroup
 } from "./Cart";
 
 ReactModal.setAppElement("#root");
 
 const Cart = ({ cart, totalItems }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
-
+  console.dir(cart)
   function openModal() {
     setIsOpen(true);
-    console.log("open");
   }
 
   function closeModal() {
@@ -34,30 +34,38 @@ const Cart = ({ cart, totalItems }) => {
   );
 
   const FilledCart = () => (
+    
     <>
-      <CartLink onClick={openModal}></CartLink>
+      <CartLink onClick={openModal} total={cart.total_items} />
       <ReactModal isOpen={modalIsOpen} onRequestClose={closeModal}>
-      <CloseModalButton onClick={closeModal}/>
-        <CartContainer>
+        <CloseModalButton onClick={closeModal} />
         <h1>Your shopping cart</h1>
-          {cart.line_items.map((product) => (
-            <ItemWrapper key={product.id}>
-              <CartImg src={product.image.url} alt={product.name} />
-              <h3>{product.name}</h3>
-              <ButtonsQuanity>
-              <h4>{product.line_total.formated_with_symbol}</h4>
-                <ButtonPlus>+</ButtonPlus>
-                <ButtonMinus>-</ButtonMinus>
-              </ButtonsQuanity>
-              <ButtonRemove>Remove</ButtonRemove>
-            </ItemWrapper>
-          ))}
-        </CartContainer>
-        <CartDetails>
-          <h4>Subtotal: {cart.total_items}</h4>
-        </CartDetails>
-        <ButtonEmpty>Empty Cart</ButtonEmpty>
-        <ButtonBuy>Checkout</ButtonBuy>
+        <Container>
+          <CartContainer>
+            {cart.line_items.map((product, index) => ( 
+              
+              <ItemWrapper key={product.id}>
+                <ItemLeft>
+                <img src={product.image.url} alt={product.name} />
+                <h4>{product.name}</h4>
+                </ItemLeft>
+                <ItemRight>
+                  <ButtonsGroup>
+                  <ButtonMinus />
+                  <h4>{product.quantity}</h4>
+                  <ButtonPlus />
+                  </ButtonsGroup>
+                <ButtonRemove />
+                </ItemRight>
+              </ItemWrapper>
+            ))}
+          </CartContainer>
+          <CartDetails>
+            <h4>Subtotal: {cart.subtotal.formatted_with_code}</h4>
+            <ButtonEmpty>Remove</ButtonEmpty>
+            <ButtonBuy>Checkout</ButtonBuy>
+          </CartDetails>
+        </Container>
       </ReactModal>
     </>
   );
