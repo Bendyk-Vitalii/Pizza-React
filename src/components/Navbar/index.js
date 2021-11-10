@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav, NavIcon } from "./Navbar";
-import LogInModal from "./LogInModal";
-import CartModal from "./CartModal"
+import LogInModal from "../LogInModal";
+import CartModal from "../CartModal"
 
 
 const Navbar = ({ toogle, cart }) => {

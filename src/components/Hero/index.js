@@ -11,7 +11,7 @@ import {
 } from './Hero';
 
 
-const Hero = ( {cart} ) => {
+const Hero = () => {
 const [isOpen, setIsOpen] = useState(false)
 
 const toogle = () => {
@@ -20,13 +20,13 @@ const toogle = () => {
 
     return (
         <HeroContainer>
-            <Navbar toogle={toogle} cart={cart} />
+            <Navbar toogle={toogle} />
             <Sidebar isOpen={isOpen} toogle={toogle} />
             <HeroContent>
                 <HeroItems>
                    <HeroH1>Greatest Pizza Ever</HeroH1>
                    <HeroP>Ready in 60 seconds</HeroP> 
-                   <HeroBtn>Place Order</HeroBtn>
+                   {/* <HeroBtn>Place Order</HeroBtn> */}
                 </HeroItems>
             </HeroContent>
         </HeroContainer>
