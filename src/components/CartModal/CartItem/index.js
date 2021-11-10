@@ -29,7 +29,7 @@ const CartItem = () => {
             <h4>{product.quantity}</h4>
             <ButtonPlus onClick={() => updateCartQty(product.id, product.quantity + 1)} />
           </ButtonsGroup>
-          <ButtonRemove onClick={() => RemoveFromCart(product.id)} />
+          <ButtonRemove onClick={() => updateCartQty(product.id, product.quantity - 1)} />
         </ItemRight>
       </ItemWrapper>
     ))}
