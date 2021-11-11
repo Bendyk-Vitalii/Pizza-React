@@ -2,13 +2,14 @@ import React, { useState, useContext } from "react";
 import ReactModal from "react-modal";
 import { CartContext } from "../../App";
 import {
-  CartContainer,
+  CartModal,
   CartDetails,
   Container,
   ButtonEmpty,
   ButtonBuy,
   CartLink,
   CloseModalButton,
+  CartContainer
 } from "./Cart";
 import CartItem from "./CartItem";
 
@@ -28,17 +29,17 @@ const Cart = () => {
   const EmptyCart = () => (
     <>
       <CartLink onClick={openModal} total={cart.total_items} />
-      <ReactModal isOpen={modalIsOpen} onRequestClose={closeModal}>
+      <CartModal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <CloseModalButton onClick={closeModal} />
         <div>You have no items in your shopping art, start adding some! </div>
-      </ReactModal>
+      </CartModal>
     </>
   );
 
   const FilledCart = () => (
     <>
       <CartLink onClick={openModal} />
-      <ReactModal isOpen={modalIsOpen} onRequestClose={closeModal}>
+      <CartModal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <CloseModalButton onClick={closeModal} />
         <h1>Your shopping cart</h1>
         <Container>
@@ -49,7 +50,7 @@ const Cart = () => {
             <ButtonBuy>Checkout</ButtonBuy>
           </CartDetails>
         </Container>
-      </ReactModal>
+      </CartModal>
     </>
   );
   if (!cart.line_items) return <CartLink onClick={openModal} total={cart.total_items} />;

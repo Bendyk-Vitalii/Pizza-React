@@ -1,16 +1,29 @@
 import styled from 'styled-components';
 import { FaShoppingCart } from 'react-icons/fa';
 import { MdClose } from 'react-icons/md';
+import ReactModal from 'react-modal';
+
+export const CartModal = styled(ReactModal)`
+background-color: whitesmoke;
+height: 100%;
+margin: 2rem auto;
+border: none;
+border-radius: 10px;
+text-align: center;
+padding-top: 10vh;
+`
 
 export const CartContainer = styled.div`
-  
 `
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 1.8fr 1fr;
+  grid-template-columns: 50vw 30vw;
+  justify-content: center;
   grid-gap: 40px;
-  margin-top: 30px;
+  padding-top: 30px;
+  border-radius: 10px;
+  background-color: white;
   h1 {
   text-align: center;
   font-size: clamp(3rem, 5vw, 5rem);
@@ -83,5 +96,5 @@ export const CloseModalButton = styled(MdClose)`
   width: 32px;
   height: 32px;
   padding: 0;
-  z-index: 10;
+  z-index: 22;
 `;
