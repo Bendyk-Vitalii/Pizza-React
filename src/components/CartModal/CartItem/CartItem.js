@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import {  FaPlus, FaMinus, FaTrashAlt } from 'react-icons/fa';
 
 export const CartContainer = styled.div`
-  
+  display: grid;
+  align-items: center;
 `
 
 export const ItemWrapper = styled.div`
