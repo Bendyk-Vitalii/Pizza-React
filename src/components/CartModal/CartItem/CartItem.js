@@ -21,6 +21,10 @@ export const ItemWrapper = styled.div`
     position: static;
     margin-right: 30;
   }
+  @media (max-width: 666px) {
+    flex-direction: column;
+    height: 60vh;
+  }
 `
 
 export const ButtonsGroup = styled.div`
@@ -42,7 +46,7 @@ export const  ItemRight = styled.div`
   justify-content: space-between;
   width: 35%;
   @media (max-width: 991px) {
-    min-width: 260px;
+    min-width: 200px;
   }
 `
 
