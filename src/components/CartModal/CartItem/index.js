@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CartContext } from "../../../App";
 import {
   ItemWrapper,
@@ -10,9 +10,13 @@ import {
   ButtonsGroup,
   CartContainer,
 } from "./CartItem";
+import { RemoveFromCart } from '../../../Redux/cart';
+import { useDispatch } from 'react-redux';
 
-const CartItem = () => {
-  const { updateCartQty, RemoveFromCart, cart } =
+const CartItem = ( {cart} ) => {
+ const dispatch = useDispatch()
+  
+  const { updateCartQty } =
     useContext(CartContext);
 
     return ( 
@@ -25,11 +29,11 @@ const CartItem = () => {
         </ItemLeft>
         <ItemRight>
           <ButtonsGroup>
-            <ButtonMinus onClick={() =>RemoveFromCart(product.id)} />
+            <ButtonMinus onClick={() => updateCartQty(product.id, product.quantity - 1)} />
             <h4>{product.quantity}</h4>
             <ButtonPlus onClick={() => updateCartQty(product.id, product.quantity + 1)} />
           </ButtonsGroup>
-          <ButtonRemove onClick={() => updateCartQty(product.id, product.quantity - 1)} />
+          <ButtonRemove onClick={() => dispatch(RemoveFromCart(product.id))} />
         </ItemRight>
       </ItemWrapper>
     ))}

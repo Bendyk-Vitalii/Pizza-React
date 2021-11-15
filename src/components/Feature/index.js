@@ -10,7 +10,7 @@ const Feature = ({ data, buttonAddHandler }) => {
 
         return (
           <>
-            <p dangerouslySetInnerHTML={{ __html: product.description }} key={product.id}></p>
+            <p dangerouslySetInnerHTML={{ __html: product.description }}></p>
             <FeatureButton onClick={() => buttonAddHandler(product.id)}>
               Order Now
             </FeatureButton>

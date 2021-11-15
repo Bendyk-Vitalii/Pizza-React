@@ -11,6 +11,7 @@ border: none;
 border-radius: 10px;
 text-align: center;
 padding-top: 10vh;
+overflow: scroll;
 `
 
 export const CartContainer = styled.div`
@@ -50,7 +51,6 @@ export const CartDetails = styled.div`
   justify-content: space-evenly;
   padding: 10px;
   height: 50vh;
-  box-shadow: 8px 8px 16px hsl(236deg 6% 49% / 15%);
   @media(max-width: 1000px) {
     flex-direction: column;
   }

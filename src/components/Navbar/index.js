@@ -4,12 +4,12 @@ import LogInModal from "../LogInModal";
 import CartModal from "../CartModal"
 
 
-const Navbar = ({ toogle, cart }) => {
+const Navbar = ({ toogle }) => {
   return (
     <FixedWrapper>
       <Nav>
         <LogInModal />
-        <CartModal cart={cart} />
+        <CartModal />
         <NavIcon onClick={toogle} /> 
       </Nav>
     </FixedWrapper>

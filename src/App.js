@@ -9,46 +9,48 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import { commerce } from "./lib/commerce";
 import { Element } from "react-scroll";
+import { useDispatch } from "react-redux";
+import { fetchCart } from "./Redux/cart";
 
 export const CartContext = React.createContext([]);
-function App() {
-  const [products, setProducts] = useState([]);
 
-  const [cart, setCart] = useState({});
+function App() {
+  const dispatch = useDispatch();
+  const [products, setProducts] = useState([])
 
   const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
-    setProducts(data);
+    const { data } = await commerce.products.list()
+    setProducts(data)
   };
 
-  const fetchCart = async () => {
-    setCart(await commerce.cart.retrieve());
-  };
+  // const fetchCart = async () => {
+  //   setCart(await commerce.cart.retrieve());
+  // };
   //add cart to server
   const handleAddToCart = async (productId) => {
     const item = await commerce.cart.add(productId);
-    setCart(item.cart);
+    //setCart(item.cart);
   };
 
   const updateCartQty = async (productId, quantity) => {
     const cart = await commerce.cart.add(productId);
-    setCart(cart);
+    //setCart(cart);
   };
 
   const RemoveFromCart = async (lineItemId) => {
     const response = await commerce.cart.remove(lineItemId);
-    setCart(response.cart);
+    //setCart(response.cart);
   };
 
   const handleEmptyCart = async () => {
     const { cart } = await commerce.cart.empty();
-    setCart(cart);
+    //setCart(cart);
   };
 
   useEffect(() => {
-    fetchProducts();
-    fetchCart();
-    Aos.init({ duration: 1000 });
+    fetchProducts()
+    dispatch(fetchCart())
+    Aos.init({ duration: 1000 })
   }, []);
 
   const pizza = products.filter((el) => el.sku === "pizza");
@@ -56,7 +58,7 @@ function App() {
   const productOfTheDay = products.filter(
     (el) => el.sku === "Pizza of the Day"
   );
-  const MemoizedHeroComponent = React.memo(Hero)
+  const MemoizedHeroComponent = React.memo(Hero);
   const MemoizedFooterComponent = React.memo(Footer);
   return (
     <Router>
@@ -66,8 +68,6 @@ function App() {
           updateCartQty,
           RemoveFromCart,
           handleEmptyCart,
-          setCart,
-          cart,
         }}
       >
         <MemoizedHeroComponent />

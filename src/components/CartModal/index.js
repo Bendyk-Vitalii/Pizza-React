@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import ReactModal from "react-modal";
 import { CartContext } from "../../App";
 import {
@@ -12,20 +12,28 @@ import {
   CartContainer
 } from "./Cart";
 import CartItem from "./CartItem";
-
+import  { useSelector, useDispatch } from 'react-redux';
+import { EmptyCartHandler } from '../../Redux/cart';
 ReactModal.setAppElement("#root");
 
 const Cart = () => {
-  const { handleEmptyCart, cart} = useContext(CartContext);
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const { cart } = useSelector(state => state.cart)
+  const dispatch = useDispatch()
 
+
+  const handleEmptyCart = () => {
+    dispatch(EmptyCartHandler())
+  }
+
+  
+  const [modalIsOpen, setIsOpen] = useState(false)
   function openModal() {
     setIsOpen(true);
   }
-
   function closeModal() {
     setIsOpen(false);
   }
+  
   const EmptyCart = () => (
     <>
       <CartLink onClick={openModal} total={cart.total_items} />
@@ -43,7 +51,7 @@ const Cart = () => {
         <CloseModalButton onClick={closeModal} />
         <h1>Your shopping cart</h1>
         <Container>
-          <CartItem /> 
+          <CartItem cart={cart} /> 
           <CartDetails>
             <h4>Subtotal: {cart.subtotal.formatted_with_code}</h4>
             <ButtonEmpty onClick={handleEmptyCart}>Remove</ButtonEmpty>
@@ -53,7 +61,7 @@ const Cart = () => {
       </CartModal>
     </>
   );
-  if (!cart.line_items) return <CartLink onClick={openModal} total={cart.total_items} />;
+ if (!cart.line_items) return <CartLink onClick={openModal} total={cart.total_items} />;
   return (
     <CartContainer>
       {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
