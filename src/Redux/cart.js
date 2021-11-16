@@ -17,7 +17,7 @@ export const fetchCart = createAsyncThunk("cart/fetchCart", async function (_, {
 export const AddToCart = createAsyncThunk("cart/AddToCart", async function (productId, {rejectWithValue, dispatch}) {
   try {
     const data = await commerce.cart.add(productId)
-    dispatch(addItem(data))
+     dispatch(addItem(data))
     if (!data.id) {
       throw new Error('Server Error!')
     }
@@ -67,10 +67,10 @@ const cartSlice = createSlice({
   },
   reducers: {
     addItem(state, action) {
-      state.cart.cart.push(action.payload)
+      state.cart.push(action.payload)
     },
     removeItem(state, action) {
-      state.cart = state.cart.cart.filter(cart => cart.id !== action.payload.id)
+      state.cart = state.cart.filter(cart => cart.id !== action.payload.id)
     },
     emptyCart(state) {
       state.cart.cart = []
