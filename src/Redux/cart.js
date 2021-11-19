@@ -40,14 +40,28 @@ export const RemoveFromCart = createAsyncThunk("cart/removeFromCart", async func
   }
 });
 
-export const EmptyCartHandler = createAsyncThunk("cart/emptyCart", async function (state, rejectWithValue, dispatch) {
+export const EmptyCartHandler = createAsyncThunk("cart/emptyCart", async function (state,  {rejectWithValue, dispatch} ) {
   try {
     const data = await commerce.cart.empty()
     if (!data.success) {
       throw new Error('Can\'t delete product!')
     }
 
-    dispatch(emptyCart())
+    dispatch(refreshState(data))
+
+  } catch (error) {
+    return rejectWithValue(error.message)
+  }
+});
+
+export const UpdateCartQty = createAsyncThunk("cart/updateQtyCart", async function (productId, quantity,  {rejectWithValue, dispatch}) {
+  try {
+    const data = await commerce.cart.update(productId, { quantity })
+    if (!data.success) {
+      throw new Error('Can\'t add product!')
+    }
+
+    dispatch(refreshState(data))
 
   } catch (error) {
     return rejectWithValue(error.message)
@@ -69,9 +83,6 @@ const cartSlice = createSlice({
   reducers: {
     refreshState(state, {payload}) {
       state.cart = payload.cart
-    },
-    removeItem(state, action) {
-      state.cart = state.cart.filter(cart => cart.id !== action.payload.id)
     },
     emptyCart(state) {
       state.cart.cart = []
