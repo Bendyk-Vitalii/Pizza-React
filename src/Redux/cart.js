@@ -17,10 +17,11 @@ export const fetchCart = createAsyncThunk("cart/fetchCart", async function (_, {
 export const AddToCart = createAsyncThunk("cart/AddToCart", async function (productId, {rejectWithValue, dispatch}) {
   try {
     const data = await commerce.cart.add(productId)
-     dispatch(addItem(data))
-    if (!data.id) {
+     
+    if (!data.success) {
       throw new Error('Server Error!')
     }
+    dispatch(refreshState(data))
   } catch (error) {
     return rejectWithValue(error.message)
   }
@@ -29,11 +30,11 @@ export const AddToCart = createAsyncThunk("cart/AddToCart", async function (prod
 export const RemoveFromCart = createAsyncThunk("cart/removeFromCart", async function (productId, {rejectWithValue, dispatch}) {
   try {
     const data = await commerce.cart.remove(productId)
-    dispatch(removeItem(productId))
-    if (!data.id) {
+    
+    if (!data.success) {
       throw new Error('Can\'t delete product!')
     }
-
+    dispatch(refreshState(data))
   } catch (error) {
     return rejectWithValue(error.message)
   }
@@ -42,7 +43,7 @@ export const RemoveFromCart = createAsyncThunk("cart/removeFromCart", async func
 export const EmptyCartHandler = createAsyncThunk("cart/emptyCart", async function (state, rejectWithValue, dispatch) {
   try {
     const data = await commerce.cart.empty()
-    if (!data.id) {
+    if (!data.success) {
       throw new Error('Can\'t delete product!')
     }
 
@@ -66,8 +67,8 @@ const cartSlice = createSlice({
     error: null,
   },
   reducers: {
-    addItem(state, action) {
-      state.cart.push(action.payload)
+    refreshState(state, {payload}) {
+      state.cart = payload.cart
     },
     removeItem(state, action) {
       state.cart = state.cart.filter(cart => cart.id !== action.payload.id)
@@ -81,13 +82,13 @@ const cartSlice = createSlice({
       state.status = "loading";
       state.error = null;
     },
-    [fetchCart.fulfilled]: (state, action) => {
+    [fetchCart.fulfilled]: (state, {payload}) => {
       state.status = "resolved";
-      state.cart = action.payload;
+      state.cart = payload;
     },
     [fetchCart.rejected]: setError,
   },
 });
 
-export const {removeItem, emptyCart, addItem} = cartSlice.actions;
+export const {removeItem, emptyCart, refreshState, modalsStore} = cartSlice.actions;
 export default cartSlice.reducer;
