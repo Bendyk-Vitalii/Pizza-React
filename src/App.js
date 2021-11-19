@@ -23,29 +23,11 @@ function App() {
     setProducts(data)
   };
 
-  // const fetchCart = async () => {
-  //   setCart(await commerce.cart.retrieve());
-  // };
-  //add cart to server
-  const handleAddToCart = async (productId) => {
-    const item = await commerce.cart.add(productId);
-    //setCart(item.cart);
-  };
 
   const updateCartQty = async (productId, quantity) => {
     const cart = await commerce.cart.add(productId);
     //setCart(cart);
-  };
-
-  const RemoveFromCart = async (lineItemId) => {
-    const response = await commerce.cart.remove(lineItemId);
-    //setCart(response.cart);
-  };
-
-  const handleEmptyCart = async () => {
-    const { cart } = await commerce.cart.empty();
-    //setCart(cart);
-  };
+  }
 
   useEffect(() => {
     fetchProducts()
@@ -66,8 +48,6 @@ function App() {
       <CartContext.Provider
         value={{
           updateCartQty,
-          RemoveFromCart,
-          handleEmptyCart,
         }}
       >
         <MemoizedHeroComponent />
@@ -76,15 +56,13 @@ function App() {
         <Products
           heading="Choose your favorite"
           data={pizza}
-          buttonAddHandler={handleAddToCart}
         />
       </Element>
-      <Feature data={productOfTheDay} buttonAddHandler={handleAddToCart} />
+      <Feature data={productOfTheDay} />
       <Element name="desserts">
         <Products
           heading="Choose sweets"
           data={sweets}
-          buttonAddHandler={handleAddToCart}
         />
       </Element>
       <MemoizedFooterComponent />
