@@ -9,34 +9,29 @@ import {
   ButtonBuy,
   CartLink,
   CloseModalButton,
-  CartContainer
+  CartContainer,
 } from "./Cart";
 import CartItem from "./CartItem";
-import  { useSelector, useDispatch } from 'react-redux';
-import { EmptyCartHandler } from '../../Redux/cart';
+import { useSelector, useDispatch } from "react-redux";
+import { EmptyCartHandler } from "../../Redux/cart";
 ReactModal.setAppElement("#root");
 
 const Cart = () => {
-  const { cart } = useSelector(state => state.cart)
-  const dispatch = useDispatch()
-
+  const { cart } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   const handleEmptyCart = () => {
-    dispatch(EmptyCartHandler())
-  }
+    dispatch(EmptyCartHandler());
+  };
 
-  
-  const [modalIsOpen, setIsOpen] = useState(false)
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
-  
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const closeModal = () => setIsOpen(false);
+  const showModal = () => setIsOpen(true);
+
   const EmptyCart = () => (
     <>
-      <CartLink onClick={openModal} total={cart.total_items} />
+      <CartLink onClick={showModal} total={cart.total_items} />
       <CartModal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <CloseModalButton onClick={closeModal} />
         <div>You have no items in your shopping art, start adding some! </div>
@@ -46,12 +41,12 @@ const Cart = () => {
 
   const FilledCart = () => (
     <>
-      <CartLink onClick={openModal} />
+      <CartLink onClick={showModal} />
       <CartModal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <CloseModalButton onClick={closeModal} />
         <h1>Your shopping cart</h1>
         <Container>
-          <CartItem cart={cart} /> 
+          <CartItem cart={cart} />
           <CartDetails>
             <h4>Subtotal: {cart.subtotal.formatted_with_code}</h4>
             <ButtonEmpty onClick={handleEmptyCart}>Remove</ButtonEmpty>
@@ -61,7 +56,8 @@ const Cart = () => {
       </CartModal>
     </>
   );
- if (!cart.line_items) return <CartLink onClick={openModal} total={cart.total_items} />;
+  if (!cart.line_items)
+    return <CartLink onClick={showModal} total={cart.total_items} />;
   return (
     <CartContainer>
       {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}

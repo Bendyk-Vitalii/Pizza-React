@@ -5,12 +5,13 @@ import ReactModal from 'react-modal';
 
 export const CartModal = styled(ReactModal)`
 background-color: whitesmoke;
-height: 100%;
+height: 85%;
 margin: 2rem auto;
 border: none;
 border-radius: 10px;
 text-align: center;
 padding-top: 10vh;
+margin-top: 5rem;
 overflow: scroll;
 `
 
@@ -91,7 +92,7 @@ export const CloseModalButton = styled(MdClose)`
   position: fixed;
   font-size: 2rem;
   color: black;
-  top: 3rem;
+  top: 6rem;
   right: 4rem;
   width: 32px;
   height: 32px;

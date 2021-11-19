@@ -5,7 +5,7 @@ import { FaPizzaSlice } from 'react-icons/fa';
 export const FixedWrapper = styled.div`
 position: fixed;
 width: 100vw;
-/* z-index: 10; */
+z-index: 100;
 `
 
 export const Nav = styled.nav`
