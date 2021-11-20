@@ -11,12 +11,12 @@ const Feature = ({ data }) => {
       {data.map((product) => {
         
         return (
-          <>
+          <div className='feature' key={product.id}>
             <p dangerouslySetInnerHTML={{ __html: product.description }}></p>
             <FeatureButton onClick={() => dispatch(AddToCart(product.id))}>
               Order Now
             </FeatureButton> 
-          </>
+          </div>
         );
       })}
     </FeatureContainer>

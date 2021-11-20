@@ -56,7 +56,7 @@ export const EmptyCartHandler = createAsyncThunk("cart/emptyCart", async functio
 
 export const UpdateCartQty = createAsyncThunk("cart/updateQtyCart", async function (productId, quantity,  {rejectWithValue, dispatch}) {
   try {
-    const data = await commerce.cart.update(productId, { quantity })
+    const data = await commerce.cart.update(productId, quantity)
     if (!data.success) {
       throw new Error('Can\'t add product!')
     }

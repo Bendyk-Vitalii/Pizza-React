@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import ReactModal from "react-modal";
-import { CartContext } from "../../App";
+import React, { useState } from "react"
+import ReactModal from "react-modal"
 import {
   CartModal,
   CartDetails,
@@ -10,24 +9,24 @@ import {
   CartLink,
   CloseModalButton,
   CartContainer,
-} from "./Cart";
-import CartItem from "./CartItem";
-import { useSelector, useDispatch } from "react-redux";
-import { EmptyCartHandler } from "../../Redux/cart";
-ReactModal.setAppElement("#root");
+} from "./Cart"
+import CartItem from "./CartItem"
+import { useSelector, useDispatch } from "react-redux"
+import { EmptyCartHandler } from "../../Redux/cart"
+ReactModal.setAppElement("#root")
 
 const Cart = () => {
-  const { cart } = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
+  const { cart } = useSelector((state) => state.cart)
+  const dispatch = useDispatch()
 
   const handleEmptyCart = () => {
-    dispatch(EmptyCartHandler());
-  };
+    dispatch(EmptyCartHandler())
+  }
 
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false)
 
-  const closeModal = () => setIsOpen(false);
-  const showModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false)
+  const showModal = () => setIsOpen(true)
 
   const EmptyCart = () => (
     <>
@@ -37,7 +36,7 @@ const Cart = () => {
         <div>You have no items in your shopping art, start adding some! </div>
       </CartModal>
     </>
-  );
+  )
 
   const FilledCart = () => (
     <>
@@ -55,14 +54,14 @@ const Cart = () => {
         </Container>
       </CartModal>
     </>
-  );
+  )
   if (!cart.line_items)
-    return <CartLink onClick={showModal} total={cart.total_items} />;
+    return <CartLink onClick={showModal} total={cart.total_items} />
   return (
     <CartContainer>
       {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
     </CartContainer>
-  );
-};
+  )
+}
 
-export default React.memo(Cart);
+export default React.memo(Cart)
