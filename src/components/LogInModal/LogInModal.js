@@ -9,6 +9,7 @@ export const LogModal = styled(ReactModal)`
   margin: 10Vh auto;
   border-radius: 10px;
   background-color: whitesmoke;
+  margin-top: 5rem;
 `
 
 export const Form = styled.form`
@@ -70,7 +71,7 @@ export const CloseModalButton = styled(MdClose)`
   position: absolute;
   font-size: 2rem;
   color: black;
-  top: 10vh;
+  top: 5rem;
   right: 20vw;
   width: 32px;
   height: 32px;

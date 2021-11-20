@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   ProductsContainer,
   ProductWrapper,
@@ -11,9 +11,11 @@ import {
   ProductPrice,
   ProductButton
 } from './Products';
+import { useDispatch } from 'react-redux';
+import { AddToCart } from '../../Redux/cart';
 
-const Products = ({ heading, data, buttonAddHandler }) => {
-
+const Products = ({ heading, data }) => {
+  const dispatch = useDispatch()
   return (
     <ProductsContainer>
       <ProductsHeading>{heading}</ProductsHeading>
@@ -27,7 +29,7 @@ const Products = ({ heading, data, buttonAddHandler }) => {
                 <ProductTitle>{product.name}</ProductTitle>
                 <ProductDesc dangerouslySetInnerHTML={{ __html: product.description }} />
                 <ProductPrice>{product.price.formatted_with_symbol}</ProductPrice>
-                <ProductButton onClick={()=> buttonAddHandler(product.id)}>Add to card</ProductButton>
+                <ProductButton onClick={() => dispatch(AddToCart(product.id))}>Add to card</ProductButton>
               </ProductInfo>
             </ProductCard>
           );

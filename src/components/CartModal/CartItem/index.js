@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { CartContext } from "../../../App";
+import React from "react";
 import {
   ItemWrapper,
   ItemLeft,
@@ -10,14 +9,18 @@ import {
   ButtonsGroup,
   CartContainer,
 } from "./CartItem";
-import { RemoveFromCart } from '../../../Redux/cart';
+import { RemoveFromCart, UpdateCartQty, AddToCart } from '../../../Redux/cart';
 import { useDispatch } from 'react-redux';
 
 const CartItem = ( {cart} ) => {
  const dispatch = useDispatch()
-  
-  const { updateCartQty } =
-    useContext(CartContext);
+
+ const removeCart = (item) => {
+   dispatch(RemoveFromCart(item))
+ }
+  const updateQty = (productId, quantity) => {
+    dispatch(UpdateCartQty(productId, quantity))
+  }
 
     return ( 
   <CartContainer>
@@ -29,11 +32,11 @@ const CartItem = ( {cart} ) => {
         </ItemLeft>
         <ItemRight>
           <ButtonsGroup>
-            <ButtonMinus onClick={() => updateCartQty(product.id, product.quantity - 1)} />
+            <ButtonMinus onClick={() => product.quantity > 1 ? updateQty(product.id, product.quantity - 1) : removeCart(product.id)} />
             <h4>{product.quantity}</h4>
-            <ButtonPlus onClick={() => updateCartQty(product.id, product.quantity + 1)} />
+            <ButtonPlus onClick={() => updateQty(product.id, product.quantity + 1)} />
           </ButtonsGroup>
-          <ButtonRemove onClick={() => dispatch(RemoveFromCart(product.id))} />
+          <ButtonRemove onClick={() => removeCart(product.id)} />
         </ItemRight>
       </ItemWrapper>
     ))}

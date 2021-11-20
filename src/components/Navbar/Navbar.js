@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import { NavLink as Link } from 'react-router-dom';
 import { FaPizzaSlice } from 'react-icons/fa';
 
+export const FixedWrapper = styled.div`
+position: fixed;
+width: 100vw;
+z-index: 100;
+`
 
 export const Nav = styled.nav`
 background-color: rgba(0, 0, 0, .4);
@@ -17,7 +22,6 @@ color: #fff;
 font-size: 2rem;
 display: flex;
 align-items: center;
-text-decoration-color:  #e9ba23;
 cursor: pointer;
 :hover {
       color: tomato;
@@ -33,6 +37,7 @@ cursor: pointer;
 export const NavIcon = styled(FaPizzaSlice)`
     display: block;
     position: absolute;
+    margin-right: 2rem;
     top: 1rem;
     right: 0;
     cursor: pointer;

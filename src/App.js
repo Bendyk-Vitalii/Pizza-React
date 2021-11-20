@@ -1,65 +1,55 @@
-import React, { useEffect, useState } from 'react';
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import { GlobalStyle } from './globalStyle';
-import Hero from './components/Hero';
-import Products from './components/Products';
-import Feature from './components/Feature';
-import Footer from './components/Footer';
-import Cart from './components/Navbar/CartModal'
-import Aos from "aos";
-import "aos/dist/aos.css";
-import { commerce } from '../src/lib/commerce'
+import React, { useEffect, useState } from "react"
+import { BrowserRouter as Router } from "react-router-dom"
+import { GlobalStyle } from "./globalStyle"
+import Hero from "./components/Hero"
+import Products from "./components/Products"
+import Feature from "./components/Feature"
+import Footer from "./components/Footer"
+import Aos from "aos"
+import "aos/dist/aos.css"
+import { commerce } from "./lib/commerce"
+import { Element } from "react-scroll"
+import { useDispatch } from "react-redux"
+import { fetchCart } from "./Redux/cart"
+
+export const CartContext = React.createContext([])
 
 function App() {
-  //All product
+  const dispatch = useDispatch()
   const [products, setProducts] = useState([])
-  //add product cart to state
-  const [cart, setCart] = useState({})
-  
+
   const fetchProducts = async () => {
-    const {data} = await commerce.products.list()
+    const { data } = await commerce.products.list()
     setProducts(data)
   }
-
-  const fetchCart = async () => {
-    setCart(await commerce.cart.retrieve())
-  }
-  //add cart to server
-  const handleAddToCart = async (productId, quantity) => {
-    const item = await commerce.cart.add(productId, quantity)
-    setCart(item.cart)
-  }
+  
+  const getCart = () => dispatch(fetchCart())
 
   useEffect(() => {
     fetchProducts()
-    fetchCart()
-    Aos.init({duration: 1000 })
+    getCart()
+    Aos.init({ duration: 1000 })
   }, [])
 
+  const pizza = products.filter((el) => el.sku === "pizza")
+  const sweets = products.filter((el) => el.sku === "sweets")
+  const productOfTheDay = products.filter((el) => el.sku === "Pizza of the Day")
+  const MemoizedHeroComponent = React.memo(Hero)
+  const MemoizedFooterComponent = React.memo(Footer)
   return (
     <Router>
       <GlobalStyle />
-      <Hero cart={cart} />
-        <Products 
-      heading='Choose your favorite' 
-      data={products.filter((el) => el.sku === 'pizza')}
-      buttonAddHandler={handleAddToCart}
-      />
-
-      <Feature 
-      data={products.filter((el) => el.sku === 'Pizza of the Day')}
-      buttonAddHandler={handleAddToCart}
-      />
-
-      <Products 
-      heading='Choose sweets' 
-      data={products.filter((el) => el.sku === 'sweets')}
-      buttonAddHandler={handleAddToCart}
-      />
-
-      <Footer />
+      <MemoizedHeroComponent />
+      <Element name="pizza">
+        <Products heading="Choose your favorite" data={pizza} />
+      </Element>
+      <Feature data={productOfTheDay} />
+      <Element name="desserts">
+        <Products heading="Choose sweets" data={sweets} />
+      </Element>
+      <MemoizedFooterComponent />
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App
