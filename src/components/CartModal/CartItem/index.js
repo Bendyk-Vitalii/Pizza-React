@@ -9,7 +9,7 @@ import {
   ButtonsGroup,
   CartContainer,
 } from "./CartItem";
-import { RemoveFromCart, UpdateCartQty, AddToCart } from '../../../Redux/cart';
+import { RemoveFromCart, UpdateCartQty } from '../../../Redux/cart';
 import { useDispatch } from 'react-redux';
 
 const CartItem = ( {cart} ) => {
@@ -18,8 +18,10 @@ const CartItem = ( {cart} ) => {
  const removeCart = (item) => {
    dispatch(RemoveFromCart(item))
  }
-  const updateQty = (productId, quantity) => {
-    dispatch(UpdateCartQty(productId, quantity))
+  const updateQtyCart = (productId, quantity) => {
+    const data = {id: productId, 
+            quantity: quantity}
+    dispatch(UpdateCartQty(data))
   }
 
     return ( 
@@ -32,9 +34,9 @@ const CartItem = ( {cart} ) => {
         </ItemLeft>
         <ItemRight>
           <ButtonsGroup>
-            <ButtonMinus onClick={() => product.quantity > 1 ? updateQty(product.id, product.quantity - 1) : removeCart(product.id)} />
+            <ButtonMinus onClick={() => product.quantity > 1 ? updateQtyCart(product.id, product.quantity - 1) : removeCart(product.id)} />
             <h4>{product.quantity}</h4>
-            <ButtonPlus onClick={() => updateQty(product.id, product.quantity + 1)} />
+            <ButtonPlus onClick={() => updateQtyCart(product.id, product.quantity + 1)} />
           </ButtonsGroup>
           <ButtonRemove onClick={() => removeCart(product.id)} />
         </ItemRight>
