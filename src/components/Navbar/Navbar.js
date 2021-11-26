@@ -1,6 +1,15 @@
 import styled from 'styled-components';
 import { NavLink as Link } from 'react-router-dom';
 import { FaPizzaSlice } from 'react-icons/fa';
+import ClipLoader from "react-spinners/ClipLoader";
+
+export const Spinner = styled(ClipLoader)`
+  display: block;
+  margin: 1rem auto;
+  border-color: red;
+  color: #ffffff;
+  height: 1rem;
+`
 
 export const FixedWrapper = styled.div`
 position: fixed;
