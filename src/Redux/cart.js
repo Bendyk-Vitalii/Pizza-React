@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { commerce } from "../lib/commerce";
 
-export const fetchCart = createAsyncThunk("cart/fetchCart", async function (_, {rejectWithValue}) {
+export const fetchCart = createAsyncThunk("cart/fetchCart", async function (_, { rejectWithValue }) {
   try {
     const data = await commerce.cart.retrieve()
     
@@ -89,7 +89,7 @@ const cartSlice = createSlice({
     }
   },
   extraReducers: {
-    [fetchCart.pending]: (state, action) => {
+    [fetchCart.pending]: (state) => {
       state.status = "loading";
       state.error = null;
     },
@@ -101,5 +101,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const {removeItem, emptyCart, refreshState, modalsStore} = cartSlice.actions;
+export const { removeItem, emptyCart, refreshState } = cartSlice.actions;
 export default cartSlice.reducer;

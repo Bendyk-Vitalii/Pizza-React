@@ -13,7 +13,6 @@ import {
 } from './Products';
 import { useDispatch } from 'react-redux';
 import { AddToCart } from '../../Redux/cart';
-
 const Products = ({ heading, data }) => {
   const dispatch = useDispatch()
   return (

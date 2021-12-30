@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import Navbar from "../Navbar";
 import Sidebar from "../Sidebar";
 import {
@@ -7,10 +7,9 @@ import {
   HeroItems,
   HeroH1,
   HeroP,
-  HeroBtn,
 } from "./Hero";
 
-const Hero = () => {
+const Hero = memo(() => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toogle = () => {
@@ -29,6 +28,6 @@ const Hero = () => {
       </HeroContent>
     </HeroContainer>
   );
-};
+})
 
 export default Hero;

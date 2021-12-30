@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-//import ReactModal from 'react-modal';
-// import { compose } from 'redux';
-// import { connect } from 'react-redux';
-// import commerce from '../../lib/commerce';
 import {
     Label,
     InputWrapper,

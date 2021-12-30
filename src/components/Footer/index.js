@@ -1,4 +1,4 @@
-import React  from "react";
+import React, { memo }  from "react";
 import {
   FaFacebook,
   FaInstagram,
@@ -16,7 +16,7 @@ import {
   SocialIconLink,
 } from "./Footer";
 
-const Footer = () => {
+const Footer = memo(() => {
   return (
     <FooterContainer>
       <FooterWrap>
@@ -45,6 +45,6 @@ const Footer = () => {
       </FooterWrap>
     </FooterContainer>
   );
-};
+});
 
 export default Footer;

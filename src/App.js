@@ -8,28 +8,31 @@ import Footer from "./components/Footer"
 import Aos from "aos"
 import "aos/dist/aos.css"
 import { Element } from "react-scroll"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { fetchCart } from "./Redux/cart"
-import { useFetchProductlist } from "./hooksV2.0/useFetchProducts"
+import { fetchProducts } from "./Redux/products"
+//import { useFetchProductlist } from "./hooksV2.0/useFetchProducts"
+import Loader from "react-spinners/ClipLoader"
 
 function App() {
   const dispatch = useDispatch()
   const getCart = () => dispatch(fetchCart())
+  const getProducts = () => dispatch(fetchProducts())
 
-  const fetchProducts = useFetchProductlist()
-  const {pizza, sweets, productOfTheDay} = fetchProducts.list
+const {isLoading, isError} = getProducts
+const {pizza, sweets, productOfTheDay } = useSelector((state => state.products))
 
   useEffect(() => {
+    getProducts()
     getCart()
     Aos.init({ duration: 1000 })
   }, [])
 
-  const MemoizedHeroComponent = React.memo(Hero)
-  const MemoizedFooterComponent = React.memo(Footer)
+
   return (
     <Router>
       <GlobalStyle />
-      <MemoizedHeroComponent />
+      <Hero />
       <Element name="pizza">
         <Products heading="Choose your favorite" data={pizza} />
       </Element>
@@ -37,8 +40,16 @@ function App() {
       <Element name="desserts">
         <Products heading="Choose sweets" data={sweets} />
       </Element>
-      <MemoizedFooterComponent />
-    </Router>
+      <Footer />
+      {(() => {
+            if (isLoading) {
+              return <Loader />
+            }
+            if (isError) {
+              return <div>...error</div>
+            }
+      })()}
+    </Router> 
   )
 }
 
